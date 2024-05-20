@@ -19,11 +19,11 @@ export const ColumnTitle = styled.div`
 `;
 
 export const ColumnTitleP = styled.p`
-  color: #94A6BE;
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
+  color: #94A6BE;
 `;
 
 export const Cards = styled.div`
