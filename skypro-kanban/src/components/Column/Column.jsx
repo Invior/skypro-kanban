@@ -1,17 +1,21 @@
 import Card from "../Card/Card";
 
-const Column = ({title}) => {
-    return (
-        <div className="main__column">
-            <div className="column__title">
-                <p>{title}</p>
-            </div>
-            <div className="cards">
-                <Card category="Web Design" title="Задизайнить карточку" date="30.10.23" />
-                <Card category="Research" title="Изучить аудиторию" date="20.10.23" />
-            </div>
-        </div>
-    );
+function Column({ title, allCards }) {
+  return (
+    <div className="main__column column">
+      <div className="column__title">
+        <p>{title}</p>
+      </div>
+      {allCards.map((card) => (
+        <Card
+          title={card.title}
+          theme={card.theme}
+          date={card.date}
+          style={card.style}
+          key={card.id}
+        />
+      ))}
+    </div>
+  );
 }
-
 export default Column;
