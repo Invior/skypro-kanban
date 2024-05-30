@@ -1,44 +1,27 @@
-import { useEffect, useState } from "react";
-import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
-import Wrapper from "./components/Wrapper/Wrapper";
-import { cardList } from "./data";
-import { GlobalStyle } from "./Global.styled";
+import { Routes, Route } from "react-router-dom";
+import { appRoutes } from "./lib/appRoutes";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import HomePage from "./Pages/Home/HomePage";
+import TaskPage from "./Pages/Task/TaskPage";
+import ExitPage from "./Pages/Exit/ExitPage";
+import AddTaskPage from "./Pages/AddTask/AddTaskPage";
+import SignInPage from "./Pages/SignInPage/SignInPage";
+import SignUpPage from "./Pages/SignUpPage/SignUpPage";
+import NotFoundPage from "./Pages/NotFound/NotFoundPage";
 
-function App() {
-  const [cards, setCards] = useState(cardList);
-  const [isLoaded, setIsLoaded] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoaded(false);
-    }, 2000);
-  }, []);
-
-  function addCard() {
-    setCards([
-      ...cards,
-      {
-        id: cards.length + 1,
-
-        theme: "Research",
-
-        title: "Нужно сделать",
-
-        date: "30.11.23",
-
-        status: "Нужно сделать",
-      },
-    ]);
-  }
+export default function App() {
   return (
-    <>
-      <GlobalStyle />
-      <Wrapper>
-        <Header addCard={addCard} />
-        <Main isLoaded={isLoaded} cardList={cards} />
-      </Wrapper>
-    </>
+    <Routes>
+      <Route element={<PrivateRoute />}>
+        <Route path={appRoutes.HOME} element={<HomePage />}>
+          <Route path={appRoutes.TASK} element={<TaskPage />} />
+          <Route path={appRoutes.EXIT} element={<ExitPage />} />
+          <Route path={appRoutes.ADD_TASK} element={<AddTaskPage />} />
+        </Route>
+      </Route>
+      <Route path={appRoutes.SIGNIN} element={<SignInPage />} />
+      <Route path={appRoutes.SIGNUP} element={<SignUpPage />} />
+      <Route path={appRoutes.NOT_FOUND} element={<NotFoundPage />} />
+    </Routes>
   );
 }
-
-export default App;
