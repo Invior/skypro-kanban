@@ -72,8 +72,8 @@ export const CardBtn = styled.div`
   height: 24px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
   padding: 2px;
+  justify-content: space-around;
 `;
 
 export const CardBtnDiv = styled.div`

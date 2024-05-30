@@ -8,8 +8,8 @@ export const MainItem = styled.div`
 
 export const MainBlock = styled.div`
   width: 100%;
-  margin: 0 auto;
   padding: 25px 0 49px;
+  margin: 0 auto;
 
   @media(max-width:${breakpoints.xl}px) {
     width: 100%;

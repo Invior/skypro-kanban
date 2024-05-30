@@ -12,8 +12,8 @@ export const HeaderBlock = styled.div`
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: space-between;
   position: relative;
+  justify-content: space-between;
   top: 0;
   left: 0;
   padding: 0 10px;

@@ -5,7 +5,7 @@ export const themeStyles = {
     },
     _orange: {
       backgroundColor: "#ffe4c2",
-      color: "#ff6d00",
+      color: "#FF6d00",
     },
     _green: {
       backgroundColor: "#b4fdd1",

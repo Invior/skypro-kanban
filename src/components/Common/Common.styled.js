@@ -4,8 +4,8 @@ import { breakpoints } from "../../lib/breakpoints";
 export const Container = styled.div`
   max-width: 1260px;
   width: 100%;
-  margin: 0 auto;
   padding: 0 30px;
+  margin: 0 auto;
 
   @media(max-width:${breakpoints.md}px) {
     width: 100%;
