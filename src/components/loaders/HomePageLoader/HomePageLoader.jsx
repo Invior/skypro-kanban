@@ -3,7 +3,7 @@ import {
   DateLoader,
   ThemeLoader,
   TitleLoader,
-} from "../../../Pages/Home/HomePageLoader.styled";
+} from "../../../pages/Home/HomePageLoader.styled";
 import * as S from "../../Card/Card.styled";
 
 export default function HomePageLoader() {

@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import { appRoutes } from "./lib/appRoutes";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import HomePage from "./Pages/Home/HomePage";
-import TaskPage from "./Pages/Task/TaskPage";
-import ExitPage from "./Pages/Exit/ExitPage";
-import AddTaskPage from "./Pages/AddTask/AddTaskPage";
-import SignInPage from "./Pages/SignInPage/SignInPage";
-import SignUpPage from "./Pages/SignUpPage/SignUpPage";
-import NotFoundPage from "./Pages/NotFound/NotFoundPage";
+import HomePage from "./pages/Home/HomePage";
+import TaskPage from "./pages/Task/TaskPage";
+import ExitPage from "./pages/Exit/ExitPage";
+import AddTaskPage from "./pages/AddTask/AddTaskPage";
+import SignInPage from "./pages/SignInPage/SignInPage";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import NotFoundPage from "./pages/NotFound/NotFoundPage";
 
 export default function App() {
   return (
