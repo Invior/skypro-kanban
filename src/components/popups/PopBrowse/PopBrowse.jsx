@@ -5,7 +5,7 @@ import * as S from "./PopBrowse.styled";
 import { useTasks } from "../../../hooks/useTasks";
 import { themeNameColor } from "../../../lib/ThemeColor";
 import { GlobalStyle } from "../../../styled/global/Global.styled";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CalendarStyled, TitleDate } from "../../Calendar/Calendar.styled";
 import {
   FormNewInputAreaForBrowse,
@@ -23,30 +23,43 @@ export default function PopBrowse() {
 
   const navigate = useNavigate();
 
-  const openedCard = cards.filter((card) => card._id === id);
-  const selectedCardData = {
-    title: openedCard[0].title,
-    description: openedCard[0].description,
-    topic: openedCard[0].topic,
-    status: openedCard[0].status,
-    date: openedCard[0].date,
-  };
   const [isEditMode, setIsEditMode] = useState(false);
   const [isDiscard, setIsDiscard] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(selectedCardData.date);
-  const [editTask, setEditTask] = useState(selectedCardData);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [editTask, setEditTask] = useState({
+    title: "",
+    description: "",
+    topic: "",
+    status: "",
+    date: "",
+  });
   const [isSubmitted, setIsSubMitted] = useState(false);
+  const [isNotCorrect, setIsNotCorrect] = useState(false);
+
+  useEffect(() => {
+    if (cards.length > 0) {
+      const openedCard = cards.filter((card) => card._id === id);
+      if (openedCard.length > 0) {
+        setEditTask({
+          title: openedCard[0].title,
+          description: openedCard[0].description,
+          topic: openedCard[0].topic,
+          status: openedCard[0].status,
+          date: openedCard[0].date,
+        });
+        setSelectedDate(openedCard[0].date);
+      }
+    }
+  }, [cards, id]);
 
   const handleEditMode = () => {
     setIsEditMode(true);
     setIsDiscard(false);
-    setSelectedDate(selectedCardData.date);
-    setEditTask(selectedCardData);
+    setSelectedDate(editTask.date);
   };
 
   const handleDiscard = () => {
     setIsEditMode(false);
-    setEditTask(selectedCardData);
     setIsDiscard(true);
   };
 
@@ -60,8 +73,6 @@ export default function PopBrowse() {
     });
   };
 
-  const [isNotCorrect, setIsNotCorrect] = useState(false);
-
   const handleFormSave = async (e) => {
     e.preventDefault();
 
@@ -70,7 +81,6 @@ export default function PopBrowse() {
       return;
     }
 
-    // setIsSubMitted(true);
     const taskData = {
       ...editTask,
       date: selectedDate,
@@ -116,11 +126,11 @@ export default function PopBrowse() {
           <S.PopBrowseBlock>
             <S.PopBrowseContent>
               <S.PopBrowseTopBlock>
-                <S.PopBrowseTitle>{openedCard[0].title}</S.PopBrowseTitle>
+                <S.PopBrowseTitle>{editTask.title}</S.PopBrowseTitle>
                 <S.OpenedCardTheme
-                  $themeColor={themeNameColor[openedCard[0].topic]}
+                  $themeColor={themeNameColor[editTask.topic]}
                 >
-                  {openedCard[0].topic}
+                  {editTask.topic}
                 </S.OpenedCardTheme>
               </S.PopBrowseTopBlock>
               <S.PopBrowseStatus>
@@ -147,7 +157,7 @@ export default function PopBrowse() {
                     ))
                   ) : (
                     <S.SelectedStatus>
-                      {selectedCardData.status}
+                      {editTask.status}
                     </S.SelectedStatus>
                   )}
                 </S.PopBrowseStatusThemes>
@@ -167,7 +177,7 @@ export default function PopBrowse() {
                       ></FormNewInputAreaForBrowse>
                     ) : (
                       <S.FormBrowseArea>
-                        {openedCard[0].description}
+                        {editTask.description}
                       </S.FormBrowseArea>
                     )}
                   </S.FormBrowseBlock>
@@ -183,7 +193,7 @@ export default function PopBrowse() {
                   ) : (
                     <Calendar
                       isDiscard={isDiscard}
-                      selectedDateBrowse={openedCard[0].date}
+                      selectedDateBrowse={editTask.date}
                     />
                   )}
                 </CalendarStyled>
