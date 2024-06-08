@@ -1,24 +1,29 @@
 import Card from "../Card/Card";
-import { Cards, ColumnTitle, ColumnTitleP, MainColumn } from "./Column.styled";
+import HomePageLoader from "../loaders/HomePageLoader/HomePageLoader";
+import { Cards, ColumnTitle, MainColumn } from "./Column.styled";
 
-function Column({ title, cardList }) {
+export default function Column({ title, cardList, isLoading }) {
   return (
     <MainColumn>
       <ColumnTitle>
-        <ColumnTitleP>{title}</ColumnTitleP>
+        <p>{title}</p>
       </ColumnTitle>
       <Cards>
-        {cardList.map((card) => (
-          <Card
-            name={card.title}
-            theme={card.theme}
-            date={card.date}
-            key={card.id}
-          />
-        ))}
+        {cardList.map((card) =>
+          isLoading ? (
+            <HomePageLoader key={card.id} status={card.status} />
+          ) : (
+            <Card
+              theme={card.topic}
+              title={card.title}
+              date={card.date}
+              key={card._id}
+              status={card.status}
+              id={card._id}
+            />
+          )
+        )}
       </Cards>
     </MainColumn>
   );
 }
-
-export default Column;

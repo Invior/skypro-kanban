@@ -1,60 +1,49 @@
 import { useState } from "react";
-import {
-  HeaderBlock,
-  HeaderImg,
-  HeaderItem,
-  HeaderLogo,
-  HeaderNav,
-  MainButton,
-} from "./Header.styled";
-import { Container } from "../Common/Common.styled";
+import PopUser from "../popups/PopUser/PopUser";
+import * as S from "./Header.styled";
+import { Container } from "../../styled/common/Common.styled";
+import { Link } from "react-router-dom";
+import { appRoutes } from "../../lib/appRoutes";
+import { useUser } from "../../hooks/useUser";
 
-function Header({ addCard }) {
-  const [isOpened, setIsOpened] = useState(false);
-  function togglePopUp() {
-    setIsOpened((isOpened) => !isOpened);
-  }
+export default function Header({ isLoading }) {
+  const [isOpenUser, setIsOpenUser] = useState(false);
+  const togglePopUser = () => setIsOpenUser((prevState) => !prevState);
+  const { user } = useUser();
 
   return (
-    <HeaderItem>
+    <S.StyledHeader>
       <Container>
-        <HeaderBlock>
-          <HeaderLogo>
+        <S.HeaderBlock>
+          <S.HeaderLogo $isLoading={isLoading}>
+            {/* className="header__logo _light" */}
             <a href="" target="_self">
-              <HeaderImg src="public/images/logo.png" alt="logo" />
+              <img src="images/logo.png" alt="logo" />
             </a>
-          </HeaderLogo>
-          <HeaderLogo>
+          </S.HeaderLogo>
+          {/* <S.HeaderLogo>
+            div className="header__logo _dark"
             <a href="" target="_self">
-              <HeaderImg src="public/images/logo_dark.png" alt="logo" />
+              <img src="images/logo_dark.png" alt="logo" />
             </a>
-          </HeaderLogo>
-          <HeaderNav>
-            <MainButton id="btnMainNew" onClick={addCard}>
-              Создать новую задачу
-            </MainButton>
-            <a href="#" className="header__user _hover02" onClick={togglePopUp}>
-              Ivan Ivanov
-            </a>
-            {isOpened && (
-              <div className="header__pop-user-set pop-user-set">
-                {/* <a href="">x</a> */}
-                <p className="pop-user-set__name">Ivan Ivanov</p>
-                <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-                <div className="pop-user-set__theme">
-                  <p>Темная тема</p>
-                  <input type="checkbox" className="checkbox" name="checkbox" />
-                </div>
-                <button type="button" className="_hover03">
-                  <a href="#popExit">Выйти</a>
-                </button>
-              </div>
+          </S.HeaderLogo> */}
+          <S.HeaderNav>
+            {isLoading ? (
+              <S.HeaderBtnMainNewLocked>
+                Создать новую задачу
+              </S.HeaderBtnMainNewLocked>
+            ) : (
+              <Link to={appRoutes.ADD_TASK}>
+                <S.HeaderBtnMainNew>Создать новую задачу</S.HeaderBtnMainNew>
+              </Link>
             )}
-          </HeaderNav>
-        </HeaderBlock>
+            <S.HeaderUser $isLoading={isLoading} onClick={togglePopUser}>
+              {user.name}
+            </S.HeaderUser>
+            {isOpenUser && <PopUser setIsOpenUser={setIsOpenUser} />}
+          </S.HeaderNav>
+        </S.HeaderBlock>
       </Container>
-    </HeaderItem>
+    </S.StyledHeader>
   );
 }
-
-export default Header;

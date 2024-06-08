@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { breakpoints } from "../../lib/breakpoints";
+import { styled } from "styled-components";
+import { hover01 } from "../../styled/common/Common.styled";
 
-export const HeaderItem = styled.header`
+export const StyledHeader = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 `;
 
 export const HeaderBlock = styled.div`
@@ -12,19 +12,19 @@ export const HeaderBlock = styled.div`
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  position: relative;
   justify-content: space-between;
+  position: relative;
   top: 0;
   left: 0;
   padding: 0 10px;
 `;
 
 export const HeaderLogo = styled.div`
-width: 85px;
-`;
+  img {
+    width: 85px;
+  }
 
-export const HeaderImg = styled.img`
-width: 85px;
+  pointer-events: ${(props) => (props.$isLoading ? "none" : "auto")};
 `;
 
 export const HeaderNav = styled.nav`
@@ -35,23 +35,22 @@ export const HeaderNav = styled.nav`
   justify-content: center;
 `;
 
-export const MainButton = styled.button`
+export const HeaderBtnMainNew = styled.button`
   width: 178px;
   height: 30px;
   border-radius: 4px;
-  background-color: #565EEF;
-  color: #FFFFFF;
+  background-color: #565eef;
+  color: #ffffff;
   border: none;
   font-size: 14px;
   line-height: 1;
   font-weight: 500;
   margin-right: 20px;
-
-  &:hover {
-    background-color: #33399b;
+  a {
+    color: #ffffff;
   }
 
-  @media(max-width:${breakpoints.md}px) {
+  @media screen and (max-width: 495px) {
     z-index: 3;
     position: fixed;
     left: 16px;
@@ -62,4 +61,69 @@ export const MainButton = styled.button`
     border-radius: 4px;
     margin-right: 0;
   }
+
+  ${hover01}
+`;
+
+export const HeaderBtnMainNewLocked = styled.button`
+  width: 178px;
+  height: 30px;
+  border-radius: 4px;
+  background-color: #565eef;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  margin-right: 20px;
+  a {
+    color: #ffffff;
+  }
+
+  @media screen and (max-width: 495px) {
+    z-index: 3;
+    position: fixed;
+    left: 16px;
+    bottom: 30px;
+    top: auto;
+    width: calc(100vw - 32px);
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 0;
+  }
+
+  ${hover01}
+`;
+
+export const HeaderUser = styled.div`
+  user-select: none;
+  height: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 20px;
+  color: #565eef;
+  &:hover {
+    color: #33399b;
+  }
+  &:hover::after {
+    border-left-color: #33399b;
+    border-bottom-color: #33399b;
+  }
+  &::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+    border-left: 1.9px solid #565eef;
+    border-bottom: 1.9px solid #565eef;
+    transform: rotate(-45deg);
+    margin: -6px 0 0 5px;
+    padding: 0;
+  }
+
+  pointer-events: ${(props) => (props.$isLoading ? "none" : "auto")};
 `;
