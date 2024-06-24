@@ -20,9 +20,11 @@ export default function SignUpPage() {
   const [isNotFilledLogin, setIsNotFilledLogin] = useState(false);
   const [isNotFilledName, setIsNotFilledName] = useState(false);
   const [isNotFilledPassword, setIsNotFilledPassword] = useState(false);
+  const [isNotCorrectPassword, setIsNotCorrectPassword] = useState(false);
   const [isNotCorrectEmail, setIsNotCorrectEmail] = useState(false);
   const [isNotCorrect, setIsNotCorrect] = useState(false);
   const [isSubmitted, setIsSubMitted] = useState(false);
+  const passValue = "111";
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +35,7 @@ export default function SignUpPage() {
     setIsNotFilled(false);
     setIsSubMitted(false);
     setIsNotCorrectEmail(false);
+    setIsNotCorrectPassword(false);
 
     setLoginData({
       ...loginData,
@@ -50,6 +53,10 @@ export default function SignUpPage() {
     }
     if (loginData.password === "") {
       setIsNotFilledPassword(true);
+    }
+    if (loginData.password < passValue) {
+      setIsNotCorrectPassword(true);
+      return;
     }
     if (Object.values(loginData).includes("")) {
       setIsNotFilled(true);
@@ -94,6 +101,7 @@ export default function SignUpPage() {
                 isNotFilledName={isNotFilledName}
                 isNotFilledLogin={isNotFilledLogin}
                 isNotCorrect={isNotCorrect}
+                isNotCorrectPassword={isNotCorrectPassword}
                 handleInputChange={handleInputChange}
                 handleSignUp={handleSignUp}
               />

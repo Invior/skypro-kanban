@@ -12,6 +12,7 @@ export default function SignUpForm({
   isNotFilledPassword,
   isNotCorrectEmail,
   isNotCorrect,
+  isNotCorrectPassword,
 }) {
   return (
     <S.ModalFormLoginSignPage>
@@ -39,6 +40,7 @@ export default function SignUpForm({
         id="passwordFirst"
         placeholder="Пароль"
         $isNotFilled={isNotFilledPassword}
+        $isNotCorrect={isNotCorrectPassword}
       />
       {isNotFilled ? (
         <S.NotCorrectText>
@@ -60,6 +62,13 @@ export default function SignUpForm({
         <S.NotCorrectText>
           Пользователь с такими данными уже существует. Используйте свой логин
           для входа или зарегистрируйте новый.
+        </S.NotCorrectText>
+      ) : (
+        ""
+      )}
+      {isNotCorrectPassword ? (
+        <S.NotCorrectText>
+          Пароль должен состоять минимум из 3 символов.
         </S.NotCorrectText>
       ) : (
         ""
