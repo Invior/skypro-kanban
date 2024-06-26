@@ -18,7 +18,7 @@ export default function Header({ isLoading }) {
           <S.HeaderLogo $isLoading={isLoading}>
             {/* className="header__logo _light" */}
             <a href="" target="_self">
-              <img src="images/logo.png" alt="logo" />
+              <img src="/images/logo.png" alt="logo" />
             </a>
           </S.HeaderLogo>
           {/* <S.HeaderLogo>

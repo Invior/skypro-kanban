@@ -113,9 +113,10 @@ export async function signUp({ login, name, password }) {
       name,
       password,
     }),
-  }).then((response) => {
-    if (response.status === 400) {
-      throw new Error("Такой пользователь уже существуют");
+  }).then(async (response) => {
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error);
     }
     return response.json();
   });

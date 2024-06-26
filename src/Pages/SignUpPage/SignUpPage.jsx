@@ -20,9 +20,11 @@ export default function SignUpPage() {
   const [isNotFilledLogin, setIsNotFilledLogin] = useState(false);
   const [isNotFilledName, setIsNotFilledName] = useState(false);
   const [isNotFilledPassword, setIsNotFilledPassword] = useState(false);
+  const [error, setError] = useState(null);
   const [isNotCorrectEmail, setIsNotCorrectEmail] = useState(false);
   const [isNotCorrect, setIsNotCorrect] = useState(false);
   const [isSubmitted, setIsSubMitted] = useState(false);
+  const passValue = "111";
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,8 +34,6 @@ export default function SignUpPage() {
     setIsNotFilledPassword(false);
     setIsNotFilled(false);
     setIsSubMitted(false);
-    setIsNotCorrectEmail(false);
-
     setLoginData({
       ...loginData,
       [name]: value,
@@ -65,14 +65,13 @@ export default function SignUpPage() {
       .then((data) => {
         login(data.user);
         navigate(appRoutes.HOME);
-        setIsNotCorrect(false);
         setIsNotFilledLogin(false);
         setIsNotFilledName(false);
         setIsNotFilledPassword(false);
         setIsNotFilled(false);
       })
-      .catch(() => {
-        setIsNotCorrect(true);
+      .catch((error) => {
+        setError(error.message);
       });
   };
 
@@ -88,12 +87,11 @@ export default function SignUpPage() {
               </S.ModalTitleSignPage>
               <SignUpForm
                 isSubmitted={isSubmitted}
-                isNotCorrectEmail={isNotCorrectEmail}
                 isNotFilled={isNotFilled}
                 isNotFilledPassword={isNotFilledPassword}
                 isNotFilledName={isNotFilledName}
                 isNotFilledLogin={isNotFilledLogin}
-                isNotCorrect={isNotCorrect}
+                error={error}
                 handleInputChange={handleInputChange}
                 handleSignUp={handleSignUp}
               />

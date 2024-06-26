@@ -10,8 +10,7 @@ export default function SignUpForm({
   isNotFilledLogin,
   isNotFilledName,
   isNotFilledPassword,
-  isNotCorrectEmail,
-  isNotCorrect,
+  error,
 }) {
   return (
     <S.ModalFormLoginSignPage>
@@ -30,7 +29,6 @@ export default function SignUpForm({
         id="loginReg"
         placeholder="Эл. почта"
         $isNotFilled={isNotFilledLogin}
-        $isNotCorrectEmail={isNotCorrectEmail}
       />
       <S.ModalInputSignPage
         onChange={handleInputChange}
@@ -40,26 +38,9 @@ export default function SignUpForm({
         placeholder="Пароль"
         $isNotFilled={isNotFilledPassword}
       />
-      {isNotFilled ? (
+      {error ? (
         <S.NotCorrectText>
-          Введенные вами данные не корректны. Чтобы завершить регистрацию,
-          заполните все поля в форме.
-        </S.NotCorrectText>
-      ) : (
-        ""
-      )}
-      {isNotCorrectEmail ? (
-        <S.NotCorrectText>
-          Введенные вами данные не корректны. Чтобы завершить регистрацию,
-          введите данные корректно и повторите попытку.
-        </S.NotCorrectText>
-      ) : (
-        ""
-      )}
-      {isNotCorrect ? (
-        <S.NotCorrectText>
-          Пользователь с такими данными уже существует. Используйте свой логин
-          для входа или зарегистрируйте новый.
+          {error}
         </S.NotCorrectText>
       ) : (
         ""
