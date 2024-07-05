@@ -15,7 +15,7 @@ export default function PopNewCard() {
   const { user } = useUser();
   const { setCards } = useTasks();
   const navigate = useNavigate();
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState();
   const [isSubmitted, setIsSubMitted] = useState(false);
   const [newTask, setNewTask] = useState({
     title: "",
@@ -42,7 +42,7 @@ export default function PopNewCard() {
       token: user.token,
     };
 
-    if (Object.values(taskData).includes("")) {
+    if (Object.values(taskData).includes("" || undefined)) {
       return alert(
         "Нельзя оставлять пустые поля - необходимо внести все данные, выбрать дату и выбрать категорию"
       );
